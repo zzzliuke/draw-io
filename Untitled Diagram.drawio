@@ -1,11 +1,36 @@
-<mxfile host="app.diagrams.net" modified="2021-12-03T08:11:40.956Z" agent="5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36" etag="IRhYfWODnRbiQKtAdZ0i" version="15.8.9" type="github">
+<mxfile host="app.diagrams.net" modified="2021-12-03T08:40:32.699Z" agent="5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36" etag="5dLokw-RwANE3f1EKbYU" version="15.8.9" type="github">
   <diagram id="u1BlL8yaGkPSPMrSxkff" name="Page-1">
-    <mxGraphModel dx="1102" dy="589" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="918" dy="491" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
-        <mxCell id="0" />
+        <object label="" id="0">
+          <mxCell />
+        </object>
         <mxCell id="1" parent="0" />
-        <mxCell id="3Z7E9k9QrG-8lqZEbjGB-2" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="170" y="150" width="120" height="60" as="geometry" />
+        <mxCell id="3Z7E9k9QrG-8lqZEbjGB-5" value="执行execute方法" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="3Z7E9k9QrG-8lqZEbjGB-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="199" y="210" as="targetPoint" />
+            <mxPoint x="539" y="120" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="199" y="190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3Z7E9k9QrG-8lqZEbjGB-23" value="实例对象" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="3Z7E9k9QrG-8lqZEbjGB-2" target="3Z7E9k9QrG-8lqZEbjGB-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3Z7E9k9QrG-8lqZEbjGB-2" value="&lt;pre style=&quot;background-color: rgb(255 , 255 , 255) ; font-family: &amp;#34;consolas&amp;#34; ; font-size: 10.5pt&quot;&gt;executorService&lt;/pre&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="139" y="30" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="3Z7E9k9QrG-8lqZEbjGB-20" value="其中传入的Runnable接口对象被FutureTask对象代理" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="3Z7E9k9QrG-8lqZEbjGB-2" target="3Z7E9k9QrG-8lqZEbjGB-18">
+          <mxGeometry x="0.1282" y="10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3Z7E9k9QrG-8lqZEbjGB-10" value="&lt;pre style=&quot;background-color: #ffffff ; color: #000000 ; font-family: &amp;quot;consolas&amp;quot; ; font-size: 10.5pt&quot;&gt;ThreadPoolExecutor&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="539" y="30" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="3Z7E9k9QrG-8lqZEbjGB-18" value="FutureTask对象" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="539" y="110" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
