@@ -1,18 +1,16 @@
-<mxfile host="app.diagrams.net" modified="2021-12-03T08:43:37.580Z" agent="5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3879.400 QQBrowser/10.8.4552.400" etag="sFyl7SXX1PDOz63vJIRA" version="15.8.9" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2021-12-05T12:49:55.512Z" agent="5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3877.400 QQBrowser/10.8.4533.400" etag="5Ln0dzTtbRRTOOT9or2i" version="15.9.1" type="github" pages="2">
   <diagram id="u1BlL8yaGkPSPMrSxkff" name="executors线程池源码解析">
-    <mxGraphModel dx="760" dy="406" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="886" dy="543" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <object label="" id="0">
           <mxCell />
         </object>
         <mxCell id="1" parent="0" />
-        <mxCell id="3Z7E9k9QrG-8lqZEbjGB-5" value="执行execute方法" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="3Z7E9k9QrG-8lqZEbjGB-2" edge="1">
+        <mxCell id="3Z7E9k9QrG-8lqZEbjGB-5" value="执行核心execute方法" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="3Z7E9k9QrG-8lqZEbjGB-2" edge="1" target="0a3loxJA7eZnux-9srQ6-19">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="199" y="210" as="targetPoint" />
             <mxPoint x="539" y="120" as="sourcePoint" />
-            <Array as="points">
-              <mxPoint x="199" y="190" />
-            </Array>
+            <Array as="points" />
           </mxGeometry>
         </mxCell>
         <mxCell id="3Z7E9k9QrG-8lqZEbjGB-23" value="实例对象" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="3Z7E9k9QrG-8lqZEbjGB-2" target="3Z7E9k9QrG-8lqZEbjGB-10" edge="1">
@@ -26,11 +24,85 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="3Z7E9k9QrG-8lqZEbjGB-10" value="&lt;pre style=&quot;background-color: #ffffff ; color: #000000 ; font-family: &amp;quot;consolas&amp;quot; ; font-size: 10.5pt&quot;&gt;ThreadPoolExecutor&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="3Z7E9k9QrG-8lqZEbjGB-10" value="&lt;pre style=&quot;background-color: #ffffff ; color: #000000 ; font-family: &amp;#34;consolas&amp;#34; ; font-size: 10.5pt&quot;&gt;ThreadPoolExecutor&lt;br&gt;包含了works&lt;br/&gt;和workQueue&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="539" y="30" width="150" height="60" as="geometry" />
         </mxCell>
         <mxCell id="3Z7E9k9QrG-8lqZEbjGB-18" value="FutureTask对象" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="539" y="110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="0a3loxJA7eZnux-9srQ6-1" target="0a3loxJA7eZnux-9srQ6-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="540" y="235" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-7" value="在这个方法中，创建worker&lt;br&gt;加入到pool的workers中" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="0a3loxJA7eZnux-9srQ6-2">
+          <mxGeometry x="-0.0814" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-28" value="创建worker后启动线程" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;startFill=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="0a3loxJA7eZnux-9srQ6-1" target="0a3loxJA7eZnux-9srQ6-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-1" value="核心代码addWorker" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="320" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-5" value="worker" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="539" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-10" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;edgeStyle=orthogonalEdgeStyle;endArrow=classic;endFill=1;startArrow=diamondThin;startFill=1;" edge="1" parent="1" source="0a3loxJA7eZnux-9srQ6-9" target="0a3loxJA7eZnux-9srQ6-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-15" value="worker实现了线程接口同时放入&lt;br&gt;Thread创建了线程，把这个线程&lt;br&gt;引用又给了worker" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="0a3loxJA7eZnux-9srQ6-10">
+          <mxGeometry x="0.0072" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-9" value="Thread类" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="320" width="102" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="0a3loxJA7eZnux-9srQ6-11" target="0a3loxJA7eZnux-9srQ6-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-11" value="Runnable类" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="712" y="200" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="0a3loxJA7eZnux-9srQ6-19" target="0a3loxJA7eZnux-9srQ6-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-21" value="小于" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="0a3loxJA7eZnux-9srQ6-20">
+          <mxGeometry x="-0.6259" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-26" value="大于" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;startFill=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="0a3loxJA7eZnux-9srQ6-19" target="0a3loxJA7eZnux-9srQ6-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-19" value="core&#39;size" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="159" y="220" width="81" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-25" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry y="320" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-30" value="work继承Runnable接口&lt;br&gt;同时" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;startFill=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="0a3loxJA7eZnux-9srQ6-27" target="0a3loxJA7eZnux-9srQ6-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-32" value="在ThreadpoolExecutors.runWorker方法中&lt;br&gt;实现核心的阻塞逻辑" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;startFill=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="0a3loxJA7eZnux-9srQ6-27" target="0a3loxJA7eZnux-9srQ6-31">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-27" value="worker.start" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="445" width="120" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-29" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="539" y="427.5" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-34" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;startFill=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="0a3loxJA7eZnux-9srQ6-31" target="0a3loxJA7eZnux-9srQ6-33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-31" value="runWorker" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="532.5" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0a3loxJA7eZnux-9srQ6-33" value="死循环getTask方法" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="532.5" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
