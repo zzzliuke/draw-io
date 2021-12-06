@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-12-05T12:49:55.512Z" agent="5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3877.400 QQBrowser/10.8.4533.400" etag="5Ln0dzTtbRRTOOT9or2i" version="15.9.1" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2021-12-06T01:35:09.251Z" agent="5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3879.400 QQBrowser/10.8.4552.400" etag="0B6vUn5iFMAuKvx4TDzD" version="15.8.9" type="github" pages="2">
   <diagram id="u1BlL8yaGkPSPMrSxkff" name="executors线程池源码解析">
-    <mxGraphModel dx="886" dy="543" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1342" dy="589" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <object label="" id="0">
           <mxCell />
@@ -30,18 +30,34 @@
         <mxCell id="3Z7E9k9QrG-8lqZEbjGB-18" value="FutureTask对象" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="539" y="110" width="120" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="SeLdkWxprwsDgzLqHk9v-2" value="&lt;pre style=&quot;background-color: rgb(255 , 255 , 255) ; font-family: &amp;#34;consolas&amp;#34; ; font-size: 10.5pt&quot;&gt;runState &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;提供主要的生命周期控制，&lt;br&gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;取值：&lt;br&gt;&lt;/span&gt;RUNNING&lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;：接受新任务并处理排队任务&lt;br&gt;&lt;/span&gt;SHUTDOWN&lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;：不接受新任务，但处理排队任务&lt;br&gt;&lt;/span&gt;STOP&lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;：不接受新任务，不处理排队任务，并中断正在进行的任务&lt;br&gt;&lt;/span&gt;TIDYING&lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;：所有任务都已终止，&lt;/span&gt;workerCount &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;为零，转换到状态&lt;/span&gt;TIDYING &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;的线程将运行&lt;br&gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;    &lt;/span&gt;terminate() &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;钩子方法&lt;br&gt;&lt;/span&gt;TERMINATED&lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;： &lt;/span&gt;terminate() &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;已完成&lt;br&gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;    这些值之间的数字顺序很重要，以允许有序比较&lt;/span&gt;. runState &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;随时间单调增加，但不需要命中每个状态。&lt;br&gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;转换是： &lt;/span&gt;RUNNING -&amp;gt; SHUTDOWN &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;在调用 &lt;/span&gt;shutdown() &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;时，可能隐含在 &lt;/span&gt;finalize() &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;中&lt;br&gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;（&lt;/span&gt;RUNNING &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;或 &lt;/span&gt;SHUTDOWN&lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;）&lt;/span&gt;-&amp;gt; STOP &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;在调用 &lt;/span&gt;shutdownNow() &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;时&lt;br&gt;&lt;/span&gt;SHUTDOWN -&amp;gt; TIDYING &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;当队列和池都为空时&lt;br&gt;&lt;/span&gt;STOP -&amp;gt; TIDYING&lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;当池为空时&lt;br&gt;&lt;/span&gt;TIDYING -&amp;gt; TERMINATED &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;当 &lt;/span&gt;terminate() &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;钩子方法完成时，&lt;br&gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;    在 &lt;/span&gt;awaitTermination() &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;中等待的线程将在状态达到 &lt;/span&gt;TERMINATED &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;时返回。&lt;br&gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;    检测从 &lt;/span&gt;SHUTDOWN &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;到 &lt;/span&gt;TIDYING &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;的转换并不像您想要的那么简单，&lt;br&gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;    因为在 &lt;/span&gt;SHUTDOWN &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;状态期间队列可能会在非空之后变空，反之亦然，&lt;br&gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;    但是我们只能在看到它为空后看到 &lt;/span&gt;workerCount &lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;时才终止是 &lt;/span&gt;0&lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;（有时需要重新检查&lt;/span&gt;——&lt;span style=&quot;font-family: &amp;#34;宋体&amp;#34;&quot;&gt;见下文）。&lt;/span&gt;&lt;/pre&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="720" y="20" width="690" height="320" as="geometry" />
+        </mxCell>
         <mxCell id="0a3loxJA7eZnux-9srQ6-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="0a3loxJA7eZnux-9srQ6-1" target="0a3loxJA7eZnux-9srQ6-5">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="540" y="235" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="0a3loxJA7eZnux-9srQ6-7" value="在这个方法中，创建worker&lt;br&gt;加入到pool的workers中" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="0a3loxJA7eZnux-9srQ6-2">
+        <mxCell id="0a3loxJA7eZnux-9srQ6-7" value="在这个方法中，创建worker&lt;br&gt;加入到pool的workers中" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="0a3loxJA7eZnux-9srQ6-2">
           <mxGeometry x="-0.0814" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SeLdkWxprwsDgzLqHk9v-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="SeLdkWxprwsDgzLqHk9v-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SeLdkWxprwsDgzLqHk9v-8" value="执行逻辑将" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="SeLdkWxprwsDgzLqHk9v-7">
+          <mxGeometry x="-0.2138" y="-1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="0a3loxJA7eZnux-9srQ6-28" value="创建worker后启动线程" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;startFill=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="0a3loxJA7eZnux-9srQ6-1" target="0a3loxJA7eZnux-9srQ6-27">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SeLdkWxprwsDgzLqHk9v-6" value="&lt;span style=&quot;background-color: rgb(255 , 255 , 255) ; font-family: &amp;#34;consolas&amp;#34; ; font-size: 10.5pt&quot;&gt;ThreadPoolExecutor&lt;br&gt;&lt;/span&gt;addWork()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="123.5" y="220" width="151" height="60" as="geometry" />
         </mxCell>
         <mxCell id="0a3loxJA7eZnux-9srQ6-1" value="核心代码addWorker" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="280" y="320" width="120" height="50" as="geometry" />
@@ -52,7 +68,7 @@
         <mxCell id="0a3loxJA7eZnux-9srQ6-10" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;edgeStyle=orthogonalEdgeStyle;endArrow=classic;endFill=1;startArrow=diamondThin;startFill=1;" edge="1" parent="1" source="0a3loxJA7eZnux-9srQ6-9" target="0a3loxJA7eZnux-9srQ6-5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="0a3loxJA7eZnux-9srQ6-15" value="worker实现了线程接口同时放入&lt;br&gt;Thread创建了线程，把这个线程&lt;br&gt;引用又给了worker" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="0a3loxJA7eZnux-9srQ6-10">
+        <mxCell id="0a3loxJA7eZnux-9srQ6-15" value="worker实现了线程接口同时放入&lt;br&gt;Thread创建了线程，把这个线程&lt;br&gt;引用又给了worker" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="0a3loxJA7eZnux-9srQ6-10">
           <mxGeometry x="0.0072" y="-1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
@@ -69,7 +85,7 @@
         <mxCell id="0a3loxJA7eZnux-9srQ6-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="0a3loxJA7eZnux-9srQ6-19" target="0a3loxJA7eZnux-9srQ6-1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="0a3loxJA7eZnux-9srQ6-21" value="小于" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="0a3loxJA7eZnux-9srQ6-20">
+        <mxCell id="0a3loxJA7eZnux-9srQ6-21" value="小于" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="0a3loxJA7eZnux-9srQ6-20">
           <mxGeometry x="-0.6259" y="2" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
